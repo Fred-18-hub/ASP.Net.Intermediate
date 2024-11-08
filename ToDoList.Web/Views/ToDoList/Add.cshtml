@@ -1,0 +1,29 @@
+﻿@model ToDoList.Web.Models.TaskItem;
+@{
+	ViewData["Title"] = "Add";
+}
+
+<div class="bg-success bg-opacity-25 py-2">
+	<div class="container">
+		<h1> Add task</h1>
+	</div>
+</div>
+
+<div class="container py-5">
+	<form method="post">
+		<div>
+			<label class="form-label">Title of task</label>
+			<input type="text" class="form-control" asp-for="Title" />
+		</div>
+
+		<div class="mt-3">
+			<label class="form-label">Date to perform task</label>
+			<input type="date" class="form-control" asp-for="DateToPerform" aria-describedby="dateInfo" />
+			<small id="dateInfo" class="form-text text-muted">Skip to set date to today.</small>
+		</div>
+
+		<div class="mt-3">
+			<button type="submit" class="btn btn-success">Confirm</button>
+		</div>
+	</form>
+</div>

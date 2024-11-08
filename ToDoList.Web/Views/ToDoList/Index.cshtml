@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ToDoList.Web.Models.TaskItem>;
+@{
+	ViewData["Title"] = "My ToDo List";
+}
+
+
+<div class="bg-warning bg-opacity-25 py-2">
+	<div class="container">
+		<h1>My ToDo List</h1>
+	</div>
+</div>
+
+<div class="container mt-5 mb-5">
+	<table class="table table-hover table-striped table-borderless">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">Task Title</th>
+				<th scope="col">Date to perform task</th>
+				<th scope="col">Status</th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			@if (Model.Any())
+			{
+				@foreach (var taskItem in Model)
+				{
+					<tr>
+						<td>@taskItem.Title</td>
+						@* <td>@taskItem.DateToPerform.Date.ToString("dd/MM/yyyy")</td> *@
+						<td>@taskItem.DateToPerform</td>
+						@if (taskItem.IsCompleted)
+						{
+							<td>Completed</td>
+						}
+						else
+						{
+							<td>Not completed</td>
+						}
+						<td>
+							<a class="text-decoration-none" asp-action="Edit" asp-route-id="@taskItem.Id">
+								<button type="button" class="btn btn-outline-info">Edit</button>
+							</a>
+							<a class="text-decoration-none" asp-action="Details" asp-route-id="@taskItem.Id">
+								<button type="button" class="btn btn-outline-primary">Details</button>
+							</a>
+							<a class="text-decoration-none" asp-action="Delete" asp-route-id="@taskItem.Id">
+								<button type="button" class="btn btn-outline-danger">Delete</button>
+							</a>
+						</td>
+					</tr>
+				}
+			}
+		</tbody>
+	</table>
+</div>
+
+@if (!Model.Any())
+{
+	<p class="container text-center mb-2 mt-5">
+		There are no tasks in your to-do list. Click button below to add some tasks!
+	</p>
+}
+
+
+<div class="container mt-3" style="text-align:center">
+	<a asp-action="Add">
+		<button type="button" class="btn btn-success" style="width:200px">Add a task</button>
+	</a>
+</div>
